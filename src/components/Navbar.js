@@ -12,13 +12,13 @@ const Navbar = () => {
         <FontAwesomeIcon icon={faUmbrella} />
       </div> */}
 
-      <div className='news-icon'>
+      <div className='news-icon text-4xl'>
         <FontAwesomeIcon icon={faNewspaper} />
       </div>
       
-      <div className='pages flex flex-row text-gray-400'>
+      <div className='pages ml-5 flex flex-row text-gray-400 text-xl'>
         
-        <div className='news'>
+        <div className='news flex px-1 self-center'>
           <Link className="menu-item text-center hover:text-white active:text-white focus:text-white" to="/"> 
             {/* <div className='icon-weather mx-auto'>
               <FontAwesomeIcon icon={faCloudSunRain}/>
@@ -27,7 +27,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <div className='details flex'>
+        <div className='details flex px-1 self-center'>
           <Link className="menu-item flex flex-col text-center hover:text-white active:text-white focus:text-white" to="/details"> 
             {/* <div className='icon-cities mx-auto'>
               <FontAwesomeIcon icon={faListUl} />
@@ -36,7 +36,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <div className='categories flex'>
+        <div className='categories flex px-1 self-center'>
           <Link className="menu-item flex flex-col text-center hover:text-white active:text-white focus:text-white" to="/categories"> 
             {/* <div className='icon-map mx-auto'>
               <FontAwesomeIcon icon={faMagnifyingGlassLocation} />
