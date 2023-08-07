@@ -41,7 +41,7 @@ export const counterSlice = createSlice({
     },
     fetchArticles: (state, action) => {
       // console.log("Your category is: " + action.payload);
-      var url = `https://newsapi.org/v2/top-headlines?category=${action.payload}&language=en&apiKey=27eb38d051304121b022b2b760dfa9d3`;
+      var url = `https://newsapi.org/v2/everything?q=etherum&sortBy=popularity&apiKey=27eb38d051304121b022b2b760dfa9d3`;
       // var url = 'https://newsapi.org/v2/top-headlines?category=general&language=en&apiKey=27eb38d051304121b022b2b760dfa9d3';
       // category=general&
       // language=en&
