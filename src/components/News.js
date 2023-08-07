@@ -1,24 +1,59 @@
-import { React, useEffect, useRef } from 'react';
+import { React, useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchNews } from '../redux/counter';
 
 export default function News() {
+
+  const [topic, setTopic] = useState('');
+  const [showTopic, setShowTopic] = useState('');
+  const [render, setRender] = useState(0);
 
   const hasRun = useRef(false);
   const resultCount = useSelector((state) => state.counter.totalResults);
   const newsArray = useSelector((state) => state.counter.newsArray);
   const dispatch = useDispatch();
 
+  const searchTopic = (event) => {
+    if (event.key === 'Enter') {
+      
+      dispatch(fetchNews({category: "general", q: topic}));
+      setShowTopic(topic);
+      setRender(1);
+      setTopic('');
+
+      
+    }
+  }
+
   useEffect(() => {
     if (!hasRun.current) {
-      dispatch(fetchNews("general"));
+      dispatch(fetchNews({category: "general", q: ""}));
       hasRun.current = true;
     }
   }, []);
 
   return (
 
-    <div className='home-page mx-4'>
+    <div className='home-page mt-5 mx-4'>
+
+
+      <div className='user-control'>
+        <div className="search">
+          <input 
+              className='bg-slate-800 w-1/2 text-sm py-2 px-3 rounded-2xl'
+              value={topic}
+              onChange={event => setTopic(event.target.value)}
+              onKeyDown={searchTopic}
+              placeholder="Search for a topic/keyword"
+              type="text"/>
+        </div>
+        {render ? (
+          <div className="loaction text-xl font-bold pb-2 text-gray-400 mt-3">
+              <p>Showing results for: {showTopic} ({resultCount} results)</p>
+          </div>
+        ) : null }
+      </div>
+
 
       <div className='general-news flex flex-row flex-wrap mr-2'>
         {newsArray.map((news, id) => (

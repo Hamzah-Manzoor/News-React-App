@@ -1,7 +1,7 @@
 
 
 import News from "./components/News";
-import Details from "./components/Details";
+import Articles from "./components/Article";
 import Navbar from "./components/Navbar";
 import Business from "./components/Business";
 import Entertainment from "./components/Entertainment";
@@ -31,7 +31,7 @@ function App() {
           <Routes>
             
             <Route exact path="/" element={<News/>} />
-            <Route exact path="/details" element={<Details/>} />
+            <Route exact path="/articles" element={<Articles/>} />
             <Route exact path="/business" element={<Business/>} />
             <Route exact path="/entertainment" element={<Entertainment/>} />
             <Route exact path="/health" element={<Health/>} />
