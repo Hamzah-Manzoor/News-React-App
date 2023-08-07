@@ -2,8 +2,13 @@
 
 import News from "./components/News";
 import Details from "./components/Details";
-import Categories from "./components/Categories";
 import Navbar from "./components/Navbar";
+import Business from "./components/Business";
+import Entertainment from "./components/Entertainment";
+import Health from "./components/Health";
+import Science from "./components/Science";
+import Sports from "./components/Sports";
+import Technology from "./components/Technology";
 import './App.css';
 
 import {
@@ -27,7 +32,12 @@ function App() {
             
             <Route exact path="/" element={<News/>} />
             <Route exact path="/details" element={<Details/>} />
-            <Route exact path="/categories" element={<Categories/>} />
+            <Route exact path="/business" element={<Business/>} />
+            <Route exact path="/entertainment" element={<Entertainment/>} />
+            <Route exact path="/health" element={<Health/>} />
+            <Route exact path="/science" element={<Science/>} />
+            <Route exact path="/sports" element={<Sports/>} />
+            <Route exact path="/technology" element={<Technology/>} />
             
           </Routes>
         </div>
