@@ -15,13 +15,10 @@ export default function News() {
 
   const searchTopic = (event) => {
     if (event.key === 'Enter') {
-      
       dispatch(fetchNews({category: "general", q: topic}));
       setShowTopic(topic);
       setRender(1);
       setTopic('');
-
-      
     }
   }
 
