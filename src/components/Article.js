@@ -14,61 +14,33 @@ export default function Article() {
   const newsArray = useSelector((state) => state.counter.newsArray);
   const dispatch = useDispatch();
 
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    timeZoneName: "short"
+  };
+
   // var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  const options = { weekday: 'long' };
-
-  // const url = `https://api.openweathermap.org/data/2.5/forecast?q=${topic}&units=imperial&appid=074d357f4482b7d0427f700aca9f3194`;
-  // const coodinateURL = `api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=074d357f4482b7d0427f700aca9f3194`;
-
-  // const imageURL = `https://openweathermap.org/img/wn/${imageCode}d@2x.png`
-  // const imageURL = "https://openweathermap.org/img/wn/13n@2x.png";
-
-  // useEffect(() => {
-  //   if (topic){
-      
-  //     dispatch(fetchArticles(topic));
-  //     forceUpdate((n) => n + 1);
-  //     rest();
-  //   }
-  
-  // }, [showTopic]);
-
-
-
-  function error() {
-    // alert("No Results found, Please try searching for another topic.");
-  }
-
-  const rest = () => {
-    // this.forceUpdate();
-    // console.log("Your result count is outside in rest: " + resultCount);  
-    // setRender(1);
-  }
-
+  // const options = { weekday: 'long' };
 
 
     const searchTopic = (event) => {
-      if (event.key === 'Enter') {
-        
+      if (event.key === 'Enter') {   
         dispatch(fetchArticles(topic));
         setShowTopic(topic);
         // setRender(1);
         setTopic('');
-        // console.log("Your result count is outside: " + resultCount);
-        // if (resultCount == 0){
-        //   console.log("Your result count is: " + resultCount);
-        //   error();
-        // } else {
-        //   setShowTopic(topic);
-        // }
-        
       }
     }
 
 
   return (
     <>
-      {resultCount ? (
+      {resultCount && showTopic ? (
         <>
 
         <div className='articles ml-4 mt-6'>
@@ -77,15 +49,13 @@ export default function Article() {
 
           <div className="search">
               <input 
-                  className='bg-slate-800 w-1/2 text-sm py-2 px-3 rounded-2xl'
+                  className='bg-slate-800 w-5/6 sm:w-1/2 text-sm py-2 px-3 rounded-2xl'
                   value={topic}
                   onChange={event => setTopic(event.target.value)}
                   onKeyDown={searchTopic}
                   placeholder="Search for a topic/keyword"
                   type="text"/>
           </div>
-
-
 
         </div>
 
@@ -103,16 +73,28 @@ export default function Article() {
                     <div className='bg-slate-700 rounded-2xl py-2 my-4 px-5 flex flex-col sm:flex-row sm:justify-between 
                     h-fit sm:items-center hover:bg-slate-800 active:bg-slate-900 focus:bg-slate-900 focus:border-blue-500' key={id}>
 
-                      <div className='name-temp sm:basis-3/5 flex flex-col justify-between items-center'>
-                        <div className='name font-bold text-2xl mb-7'>
+                      <div className='name-temp sm:basis-3/5 flex flex-col justify-between'>
+                        <div className='name font-bold text-xl sm:text-2xl mb-7'>
                           {news.title}
                         </div>
 
-                        <div className='temp text-xl'>
+                        <div className='temp text-lg sm:text-xl'>
                           {news.description}
                         </div>
 
-                        <div className='btn mt-4 mb-3'>
+                        {news.publishedAt ? ( 
+                          <div className='additional-info text-gray-400 mt-2'>
+                            Published at: {new Date(news.publishedAt).toLocaleDateString("en-US", options)}
+                          </div>
+                        ) : null}
+
+                        {news.author ? ( 
+                          <div className='additional-info text-gray-400'>
+                            Author: {news.author} 
+                          </div>
+                        ) : null}
+
+                        <div className='btn mt-4 mb-3 mx-auto'>
                           <button className='button rounded-2xl inline-block align-middle font-bold text-base bg-blue-700 px-3 py-1 hover:bg-blue-800 focus:bg-slate-900 focus:border-blue-500 mr-2' 
                             onClick={() => window.open(news.url, '_blank')}>
                             Read more <span className='font-black'>&#x2192;</span>
