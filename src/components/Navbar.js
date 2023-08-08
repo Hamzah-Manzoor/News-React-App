@@ -37,11 +37,11 @@ const Navbar = () => {
         </div>
 
         <div className='details flex px-1 self-center'>
-          <Link className="menu-item flex flex-col text-center hover:text-white active:text-white focus:text-white" to="/details"> 
+          <Link className="menu-item flex flex-col text-center hover:text-white active:text-white focus:text-white" to="/articles"> 
             {/* <div className='icon-cities mx-auto'>
               <FontAwesomeIcon icon={faListUl} />
             </div> */}
-            <h1>Details</h1>
+            <h1>Articles</h1>
           </Link>
         </div>
 
