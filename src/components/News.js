@@ -13,6 +13,16 @@ export default function News() {
   const newsArray = useSelector((state) => state.counter.newsArray);
   const dispatch = useDispatch();
 
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    timeZoneName: "short"
+  };
+
   const searchTopic = (event) => {
     if (event.key === 'Enter') {
       dispatch(fetchNews({category: "general", q: topic}));
@@ -37,7 +47,7 @@ export default function News() {
       <div className='user-control'>
         <div className="search">
           <input 
-              className='bg-slate-800 w-1/2 text-sm py-2 px-3 rounded-2xl'
+              className='bg-slate-800 w-5/6 sm:w-1/2 text-sm py-2 px-3 rounded-2xl'
               value={topic}
               onChange={event => setTopic(event.target.value)}
               onKeyDown={searchTopic}
@@ -52,23 +62,45 @@ export default function News() {
       </div>
 
 
-      <div className='general-news flex flex-row flex-wrap mr-2'>
+      <div className='general-news flex flex-row flex-wrap justify-center mr-2'>
         {newsArray.map((news, id) => (
           <>
             {/* {news.author !== "BBC Sport" ? ( */}
-              <div className='bg-slate-700 rounded-2xl py-2 my-4 px-5 flex flex-col sm:flex-row sm:justify-between 
-              h-fit sm:items-center hover:bg-slate-800 active:bg-slate-900 focus:bg-slate-900 focus:border-blue-500' key={id}>
+              <div className='bg-slate-700 rounded-2xl py-2 my-4 px-5 mx-2 flex flex-col sm:justify-between 
+              h-fit sm:items-center md:w-5/12 hover:bg-slate-800 active:bg-slate-900 focus:bg-slate-900 focus:border-blue-500' key={id}>
 
-                <div className='name-temp sm:basis-2/5 flex flex-col justify-between items-center'>
-                  <div className='name font-bold text-2xl mb-7'>
+                <div className='image-btns sm:basis-3/5 justify-between items-center pr-1 sm:pr-4 pl-1 py-3'>
+                  <div className='image h-2/6'>
+                    {news.urlToImage ? ( 
+                      <img className='h-5/6' src={news.urlToImage} alt="Could not fetch image" />
+                    ): <img className='h-5/6' src='https://th.bing.com/th/id/R.50428446fe1a2469bed28c5db4166ca6?rik=wTrZv%2bwhoFkmXw&riu=http%3a%2f%2fdehayf5mhw1h7.cloudfront.net%2fwp-content%2fuploads%2fsites%2f114%2f2017%2f10%2f02065917%2fbreaking-news-shutterstock.jpg&ehk=0gOFnAI5ADyEz1nv2r7WHW7VmbfFq4t3MXwfIC9vNRc%3d&risl=&pid=ImgRaw&r=0' alt="Could not fetch image" /> }
+                    
+                  </div>
+                </div>
+
+
+                <div className='name-temp sm:basis-2/5 flex flex-col justify-between'>
+                  <div className='name font-bold text-xl sm:text-2xl mb-7'>
                     {news.title}
                   </div>
 
-                  <div className='temp text-xl'>
+                  <div className='temp text-lg sm:text-xl'>
                     {news.description}
                   </div>
 
-                  <div className='btn mt-4 mb-3'>
+                  {news.publishedAt ? ( 
+                    <div className='additional-info text-gray-400 mt-2'>
+                      Published at: {new Date(news.publishedAt).toLocaleDateString("en-US", options)}
+                    </div>
+                  ) : null}
+
+                  {news.author ? ( 
+                    <div className='additional-info text-gray-400'>
+                      Author: {news.author} 
+                    </div>
+                  ) : null}
+
+                  <div className='btn mt-4 mb-3 mx-auto'>
                     <button className='button rounded-2xl inline-block align-middle font-bold text-base bg-blue-700 px-3 py-1 hover:bg-blue-800 focus:bg-slate-900 focus:border-blue-500 mr-2' 
                       onClick={() => window.open(news.url, '_blank')}>
                       Read more <span className='font-black'>&#x2192;</span>
@@ -77,14 +109,7 @@ export default function News() {
                   </div>
                 </div>
 
-                <div className='image-btns sm:basis-3/5 justify-between items-center pl-4 pr-1 py-3'>
-                  <div className='image h-2/6'>
-                    {news.urlToImage ? ( 
-                      <img className='h-5/6' src={news.urlToImage} alt="Could not fetch image" />
-                    ): <img className='h-5/6' src='https://th.bing.com/th/id/R.50428446fe1a2469bed28c5db4166ca6?rik=wTrZv%2bwhoFkmXw&riu=http%3a%2f%2fdehayf5mhw1h7.cloudfront.net%2fwp-content%2fuploads%2fsites%2f114%2f2017%2f10%2f02065917%2fbreaking-news-shutterstock.jpg&ehk=0gOFnAI5ADyEz1nv2r7WHW7VmbfFq4t3MXwfIC9vNRc%3d&risl=&pid=ImgRaw&r=0' alt="Could not fetch image" /> }
-                    
-                  </div>
-                </div>
+
               </div>
             {/* ) : null } */}
           </>

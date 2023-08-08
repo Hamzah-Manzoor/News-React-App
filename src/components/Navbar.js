@@ -36,7 +36,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <div className='details flex px-1 self-center'>
+        <div className='details flex px-1 pl-2 self-center'>
           <Link className="menu-item flex flex-col text-center hover:text-white active:text-white focus:text-white" to="/articles"> 
             {/* <div className='icon-cities mx-auto'>
               <FontAwesomeIcon icon={faListUl} />

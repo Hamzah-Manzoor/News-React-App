@@ -13,6 +13,16 @@ export default function Health() {
     const newsArray = useSelector((state) => state.counter.newsArray);
     const dispatch = useDispatch();
 
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+      timeZoneName: "short"
+    };
+
     const searchTopic = (event) => {
       if (event.key === 'Enter') {
         dispatch(fetchNews({category: "health", q: topic}));
@@ -35,7 +45,7 @@ export default function Health() {
       <div className='user-control'>
         <div className="search">
           <input 
-              className='bg-slate-800 w-1/2 text-sm py-2 px-3 rounded-2xl'
+              className='bg-slate-800 w-5/6 sm:w-1/2 text-sm py-2 px-3 rounded-2xl'
               value={topic}
               onChange={event => setTopic(event.target.value)}
               onKeyDown={searchTopic}
@@ -53,7 +63,7 @@ export default function Health() {
         {newsArray.map((news, id) => (
 
               <div className='bg-slate-700 w-96 rounded-2xl py-2 mx-2 my-4 px-3 flex flex-col sm:justify-between 
-              h-fit sm:items-center hover:bg-slate-800 active:bg-slate-900 focus:bg-slate-900 focus:border-blue-500' key={id}>
+              h-fit hover:bg-slate-800 active:bg-slate-900 focus:bg-slate-900 focus:border-blue-500' key={id}>
 
                 <div className='image-btns justify-between items-center py-3'>
                   <div className='image h-2/6'>
@@ -64,15 +74,27 @@ export default function Health() {
                   </div>
                 </div>
 
-                <div className='title font-bold text-2xl mb-7'>
+                <div className='title font-bold text-xl sm:text-2xl mb-7'>
                     {news.title}
                 </div>
 
-                <div className='description text-xl'>
+                <div className='description text-lg sm:text-xl'>
                     {news.description}
                 </div>
 
-                <div className='btn mt-4 mb-3'>
+                {news.publishedAt ? ( 
+                  <div className='additional-info text-gray-400 mt-2'>
+                    Published at: {new Date(news.publishedAt).toLocaleDateString("en-US", options)}
+                  </div>
+                ) : null}
+
+                {news.author ? ( 
+                  <div className='additional-info text-gray-400'>
+                    Author: {news.author} 
+                  </div>
+                ) : null}
+
+                <div className='btn mt-4 mb-3 mx-auto'>
                     <button className='button rounded-2xl inline-block align-middle font-bold text-base bg-blue-700 px-3 py-1 hover:bg-blue-800 focus:bg-slate-900 focus:border-blue-500 mr-2' 
                         onClick={() => window.open(news.url, '_blank')}>
                         Read more <span className='font-black'>&#x2192;</span>
