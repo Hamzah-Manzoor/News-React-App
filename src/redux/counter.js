@@ -74,12 +74,6 @@ export const counterSlice = createSlice({
           var lengthOfArray = JSON.parse(xhReq.responseText).articles.length;
           state.totalResults = lengthOfArray;
           var news = JSON.parse(xhReq.responseText).articles;
-          // console.log("totalResults set to: " + state.totalResults);
-    
-    
-          // console.log("This is res: " + xhReq.responseText[0]);
-          // console.log("This is news: " + news[0].title);
-    
           for (var i = 0; i < lengthOfArray; i++){
             let newsObject = {
               author: news[i].author,
@@ -89,7 +83,6 @@ export const counterSlice = createSlice({
               urlToImage: news[i].urlToImage,
               publishedAt: news[i].publishedAt
             };
-            // console.log("Title is set redux: " + newsObject.title);
             state.newsArray.push(newsObject);
           }
         }
