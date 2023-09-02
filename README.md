@@ -21,6 +21,7 @@ The News React App offers six distinct categories for news articles:
 - Science
 - Business
 - Technology
+
 Users can explore news articles within their preferred category.
 Each category page allows users to search for specific topics, enhancing the relevance of their news discovery.
 
@@ -29,15 +30,22 @@ On both the Home Page, Article Page and Category Pages, users can click the "Rea
 This feature provides users with a seamless way to access the full article from the source.
 
 ## Getting Started
-To use the app, clone the repo from GitHub:
+1. To use the app, clone the repo from GitHub:
 
+```
 git clone https://github.com/Hamzah-Manzoor/news-react-app.git
-Install all the dependencies using:
+```
 
+2. Install all the dependencies using:
+```
 npm i
-To run the project, move to the directory and run the command:
+```
 
+3. To run the project, move to the directory and run the command:
+```
 npm start
+```
+
 The app will be running on http://localhost:3000.
 
 ## Use your NewsAPI key
