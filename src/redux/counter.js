@@ -12,7 +12,7 @@ export const counterSlice = createSlice({
   reducers: {
     fetchNews: (state, action) => {
       // console.log("Your category is: " + action.payload.category + " and topic is: " + action.payload.q);
-      var url = `https://newsapi.org/v2/top-headlines?category=${action.payload.category}&q=${action.payload.q}&language=en&apiKey=27eb38d051304121b022b2b760dfa9d3`;
+      var url = `https://newsapi.org/v2/top-headlines?category=${action.payload.category}&q=${action.payload.q}&language=en&apiKey={Insert API KEY Here}`;
       // var url = 'https://newsapi.org/v2/top-headlines?category=general&language=en&apiKey=27eb38d051304121b022b2b760dfa9d3';
       // category=general&
       // language=en&
